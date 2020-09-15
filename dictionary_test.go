@@ -68,3 +68,37 @@ func TestGet(t *testing.T) {
 		}
 	})
 }
+
+func TestExists(t *testing.T) {
+	t.Run("returns true if key exists", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key := "key1"
+		value := "value1"
+		dictionary.Add(key, value)
+
+		if dictionary.items[key] != value {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key], value)
+		}
+
+		if !dictionary.Exists(key) {
+			t.Error("key was reported as nonexistent")
+		}
+	})
+
+	t.Run("returns false if key does not exists", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key := "key1"
+		value := "value1"
+		dictionary.Add(key, value)
+
+		if dictionary.items[key] != value {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key], value)
+		}
+
+		if dictionary.Exists("butts") {
+			t.Error("key was reported as existent")
+		}
+	})
+}

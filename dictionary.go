@@ -49,3 +49,13 @@ func (d *Dictionary) Get(key Key) Value {
 
 	return d.items[key]
 }
+
+// Exists checks if a key exists in the dictionary.
+func (d *Dictionary) Exists(key Key) bool {
+	d.lock.RLock()
+	defer d.lock.RUnlock()
+
+	_, ok := d.items[key]
+
+	return ok
+}
