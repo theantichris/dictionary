@@ -59,3 +59,11 @@ func (d *Dictionary) Exists(key Key) bool {
 
 	return ok
 }
+
+// Clear removes all items from the dictionary.
+func (d *Dictionary) Clear() {
+	d.lock.Lock()
+	defer d.lock.Unlock()
+
+	d.items = make(map[Key]Value)
+}

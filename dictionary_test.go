@@ -102,3 +102,23 @@ func TestExists(t *testing.T) {
 		}
 	})
 }
+
+func TestClear(t *testing.T) {
+	t.Run("clears the dictionary", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key := "key1"
+		value := "value1"
+		dictionary.Add(key, value)
+
+		if dictionary.items[key] != value {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key], value)
+		}
+
+		dictionary.Clear()
+
+		if dictionary.Exists(key) {
+			t.Error("the dictionary was not cleared")
+		}
+	})
+}
