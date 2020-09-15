@@ -67,3 +67,11 @@ func (d *Dictionary) Clear() {
 
 	d.items = make(map[Key]Value)
 }
+
+// Length returns the number of items in the dictionary.
+func (d *Dictionary) Length() int {
+	d.lock.RLock()
+	defer d.lock.RUnlock()
+
+	return len(d.items)
+}

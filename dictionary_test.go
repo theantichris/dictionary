@@ -122,3 +122,21 @@ func TestClear(t *testing.T) {
 		}
 	})
 }
+
+func TestLength(t *testing.T) {
+	t.Run("returns the number of items", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key := "key1"
+		value := "value1"
+		dictionary.Add(key, value)
+
+		if dictionary.items[key] != value {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key], value)
+		}
+
+		if dictionary.Length() != 1 {
+			t.Errorf("length was not reported correctly: got %d want %d", dictionary.Length(), 1)
+		}
+	})
+}
