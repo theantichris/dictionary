@@ -18,7 +18,7 @@ type Dictionary struct {
 
 // Add adds a new item to the dictionary.
 // If the dictionary's map is nil it will initialize it.
-func (d *Dictionary) Add(key Key, value Value) {
+func (d *Dictionary) Add(k Key, v Value) {
 	d.lock.Lock()
 	defer d.lock.Unlock()
 
@@ -26,36 +26,36 @@ func (d *Dictionary) Add(key Key, value Value) {
 		d.items = make(map[Key]Value)
 	}
 
-	d.items[key] = value
+	d.items[k] = v
 }
 
 // Remove removes a value from the dictionary by key.
-func (d *Dictionary) Remove(key Key) bool {
+func (d *Dictionary) Remove(k Key) bool {
 	d.lock.Lock()
 	defer d.lock.Unlock()
 
-	_, ok := d.items[key]
+	_, ok := d.items[k]
 	if ok {
-		delete(d.items, key)
+		delete(d.items, k)
 	}
 
 	return ok
 }
 
 // Get gets the value associate with the key.
-func (d *Dictionary) Get(key Key) Value {
+func (d *Dictionary) Get(k Key) Value {
 	d.lock.RLock()
 	defer d.lock.RUnlock()
 
-	return d.items[key]
+	return d.items[k]
 }
 
 // Exists checks if a key exists in the dictionary.
-func (d *Dictionary) Exists(key Key) bool {
+func (d *Dictionary) Exists(k Key) bool {
 	d.lock.RLock()
 	defer d.lock.RUnlock()
 
-	_, ok := d.items[key]
+	_, ok := d.items[k]
 
 	return ok
 }

@@ -149,9 +149,17 @@ func TestKeys(t *testing.T) {
 		value1 := "value1"
 		dictionary.Add(key1, value1)
 
+		if dictionary.items[key1] != value1 {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key1], value1)
+		}
+
 		key2 := "key2"
 		value2 := "value2"
 		dictionary.Add(key2, value2)
+
+		if dictionary.items[key2] != value2 {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key2], value2)
+		}
 
 		keys := dictionary.Keys()
 
@@ -173,9 +181,17 @@ func TestValues(t *testing.T) {
 		value1 := "value1"
 		dictionary.Add(key1, value1)
 
+		if dictionary.items[key1] != value1 {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key1], value1)
+		}
+
 		key2 := "key2"
 		value2 := "value2"
 		dictionary.Add(key2, value2)
+
+		if dictionary.items[key2] != value2 {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key2], value2)
+		}
 
 		values := dictionary.Values()
 
