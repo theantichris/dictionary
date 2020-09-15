@@ -17,7 +17,7 @@ type Dictionary struct {
 }
 
 // Add adds a new item to the dictionary.
-// If the dictionary is nil it will initialize it.
+// If the dictionary's map is nil it will initialize it.
 func (d *Dictionary) Add(key Key, value Value) {
 	d.lock.Lock()
 	defer d.lock.Unlock()
@@ -27,4 +27,17 @@ func (d *Dictionary) Add(key Key, value Value) {
 	}
 
 	d.items[key] = value
+}
+
+// Remove removes a value from the dictionary by key.
+func (d *Dictionary) Remove(key Key) bool {
+	d.lock.Lock()
+	defer d.lock.Unlock()
+
+	_, ok := d.items[key]
+	if ok {
+		delete(d.items, key)
+	}
+
+	return ok
 }
