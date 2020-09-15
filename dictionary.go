@@ -88,3 +88,17 @@ func (d *Dictionary) Keys() []Key {
 
 	return keys
 }
+
+// Values returns a slice of all dictionary values.
+func (d *Dictionary) Values() []Value {
+	d.lock.RLock()
+	defer d.lock.RUnlock()
+
+	values := []Value{}
+
+	for i := range d.items {
+		values = append(values, d.items[i])
+	}
+
+	return values
+}

@@ -164,3 +164,27 @@ func TestKeys(t *testing.T) {
 		}
 	})
 }
+
+func TestValues(t *testing.T) {
+	t.Run("returns the dictionary's values", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key1 := "key1"
+		value1 := "value1"
+		dictionary.Add(key1, value1)
+
+		key2 := "key2"
+		value2 := "value2"
+		dictionary.Add(key2, value2)
+
+		values := dictionary.Values()
+
+		if values[0] != value1 {
+			t.Errorf("key does not match: got %q want %q", values[0], value1)
+		}
+
+		if values[1] != value2 {
+			t.Errorf("key does not match: got %q want %q", values[1], value2)
+		}
+	})
+}
