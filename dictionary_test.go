@@ -48,3 +48,23 @@ func TestRemove(t *testing.T) {
 		}
 	})
 }
+
+func TestGet(t *testing.T) {
+	t.Run("gets a value", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key := "key1"
+		value := "value1"
+		dictionary.Add(key, value)
+
+		if dictionary.items[key] != value {
+			t.Fatalf("value was not added: got %q want %q", dictionary.items[key], value)
+		}
+
+		got := dictionary.Get(key)
+
+		if got != value {
+			t.Errorf("the wrong value was returned: got %q want %q", got, value)
+		}
+	})
+}

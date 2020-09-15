@@ -41,3 +41,11 @@ func (d *Dictionary) Remove(key Key) bool {
 
 	return ok
 }
+
+// Get gets the value associate with the key.
+func (d *Dictionary) Get(key Key) Value {
+	d.lock.RLock()
+	defer d.lock.RUnlock()
+
+	return d.items[key]
+}
