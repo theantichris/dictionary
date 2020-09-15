@@ -75,3 +75,16 @@ func (d *Dictionary) Length() int {
 
 	return len(d.items)
 }
+
+// Keys returns a slice of all dictionary keys.
+func (d *Dictionary) Keys() []Key {
+	d.lock.RLock()
+	d.lock.RUnlock()
+
+	keys := []Key{}
+	for i := range d.items {
+		keys = append(keys, i)
+	}
+
+	return keys
+}

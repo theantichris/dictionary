@@ -140,3 +140,27 @@ func TestLength(t *testing.T) {
 		}
 	})
 }
+
+func TestKeys(t *testing.T) {
+	t.Run("returns the dictionary's keys", func(t *testing.T) {
+		dictionary := Dictionary{}
+
+		key1 := "key1"
+		value1 := "value1"
+		dictionary.Add(key1, value1)
+
+		key2 := "key2"
+		value2 := "value2"
+		dictionary.Add(key2, value2)
+
+		keys := dictionary.Keys()
+
+		if keys[0] != key1 {
+			t.Errorf("key does not match: got %q want %q", keys[0], key1)
+		}
+
+		if keys[1] != key2 {
+			t.Errorf("key does not match: got %q want %q", keys[1], key2)
+		}
+	})
+}
